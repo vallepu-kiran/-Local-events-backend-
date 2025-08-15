@@ -26,6 +26,7 @@ const eventRoutes = require("./routes/events")
 const messageRoutes = require("./routes/messages")
 const reviewRoutes = require("./routes/reviews")
 const adminRoutes = require("./routes/admin")
+const notificationRoutes = require("./routes/notifications")
 
 const app = express()
 const server = createServer(app)
@@ -89,6 +90,7 @@ app.use("/api/events", eventRoutes)
 app.use("/api/messages", messageRoutes)
 app.use("/api/reviews", reviewRoutes)
 app.use("/api/admin", adminRoutes)
+app.use("/api/notifications", notificationRoutes)
 
 // Socket.IO connection handling
 io.on("connection", (socket) => {
