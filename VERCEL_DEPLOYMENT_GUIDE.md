@@ -27,11 +27,15 @@
 ### Step 1: Set Up Database (Required)
 Vercel doesn't provide databases, so you need an external one:
 
-**Option A: PlanetScale (Recommended)**
-1. Go to [planetscale.com](https://planetscale.com)
-2. Create free account
-3. Create new database
-4. Get connection string
+**Option A: PlanetScale (FREE - Recommended)**
+- ✅ **FREE** 1GB MySQL database
+- ✅ **Serverless-optimized** for Vercel
+- ✅ **5-minute setup**
+1. Go to [planetscale.com](https://planetscale.com) 
+2. Sign up with GitHub (free)
+3. Create database `local-events-db`
+4. Copy connection string
+5. **See PLANETSCALE_SETUP_GUIDE.md for detailed steps**
 
 **Option B: Supabase**
 1. Go to [supabase.com](https://supabase.com)
