@@ -8,7 +8,9 @@
     "dev": "nodemon src/server.js",
     "migrate": "node src/scripts/migrate.js",
     "seed": "node src/scripts/seed.js",
-    "railway:start": "npm run migrate && npm start"
+    "railway:start": "npm run migrate && npm start",
+    "vercel-build": "echo 'Building for Vercel deployment'",
+    "vercel:migrate": "node src/scripts/migrate.js"
   },
   "dependencies": {
     "express": "^4.18.2",

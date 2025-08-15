@@ -9,9 +9,9 @@ const Message = require("../entities/Message")
 const Review = require("../entities/Review")
 const Notification = require("../entities/Notification")
 
-// Parse DATABASE_URL for production (Railway) or use individual env vars for development
+// Parse DATABASE_URL for production (Railway/Vercel) or use individual env vars for development
 const getDatabaseConfig = () => {
-  // If DATABASE_URL is provided (Railway/production), parse it
+  // If DATABASE_URL is provided (Railway/Vercel/production), parse it
   if (process.env.DATABASE_URL) {
     const url = new URL(process.env.DATABASE_URL)
     return {
@@ -22,6 +22,17 @@ const getDatabaseConfig = () => {
       password: url.password,
       database: url.pathname.slice(1), // Remove leading '/'
       ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
+      // Optimizations for serverless
+      connectTimeout: 10000,
+      acquireTimeout: 10000,
+      timeout: 10000,
+      // Connection pooling for serverless
+      extra: {
+        connectionLimit: 1, // Single connection for serverless
+        idleTimeout: 3000,
+        acquireTimeout: 10000,
+        reconnect: true,
+      }
     }
   }
   
