@@ -21,7 +21,9 @@ const app = express()
 const server = createServer(app)
 
 // Socket.IO setup
-const allowedOrigins = process.env.FRONTEND_URL.split(',').map(url => url.trim())
+const allowedOrigins = process.env.FRONTEND_URL 
+  ? process.env.FRONTEND_URL.split(',').map(url => url.trim())
+  : ['http://localhost:3000', 'http://localhost:8081']
 const io = new Server(server, {
   cors: {
     origin: allowedOrigins,
