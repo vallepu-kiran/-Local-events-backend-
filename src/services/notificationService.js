@@ -42,7 +42,6 @@ class NotificationService {
       }
 
       const response = await admin.messaging().send(message)
-      console.log("Push notification sent successfully:", response)
       return response
     } catch (error) {
       console.error("Push notification failed:", error)
@@ -76,7 +75,6 @@ class NotificationService {
       }
 
       const response = await admin.messaging().sendMulticast(message)
-      console.log("Multicast notification sent:", response)
       return response
     } catch (error) {
       console.error("Multicast notification failed:", error)

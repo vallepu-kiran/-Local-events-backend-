@@ -80,18 +80,15 @@ app.use("/api/admin", adminRoutes)
 
 // Socket.IO connection handling
 io.on("connection", (socket) => {
-  console.log("User connected:", socket.id)
 
   // Join event room for real-time messaging
   socket.on("join_event", (eventId) => {
     socket.join(`event_${eventId}`)
-    console.log(`User ${socket.id} joined event room: event_${eventId}`)
   })
 
   // Leave event room
   socket.on("leave_event", (eventId) => {
     socket.leave(`event_${eventId}`)
-    console.log(`User ${socket.id} left event room: event_${eventId}`)
   })
 
   // Handle new message
@@ -114,7 +111,6 @@ io.on("connection", (socket) => {
   })
 
   socket.on("disconnect", () => {
-    console.log("User disconnected:", socket.id)
   })
 })
 
