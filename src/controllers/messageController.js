@@ -73,7 +73,11 @@ class MessageController {
           }),
         )
 
-      await Promise.allSettled(notificationPromises)
+      const results = await Promise.allSettled(notificationPromises)
+      const failures = results.filter(result => result.status === 'rejected')
+      if (failures.length > 0) {
+        console.warn(`${failures.length} push notifications failed`)
+      }
 
       res.status(201).json({
         success: true,

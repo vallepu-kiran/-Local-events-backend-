@@ -1,4 +1,14 @@
 require("dotenv").config()
+
+// Validate required environment variables
+const requiredEnvVars = ['JWT_SECRET'];
+requiredEnvVars.forEach(varName => {
+  if (!process.env[varName]) {
+    console.error(`${varName} environment variable is required`);
+    process.exit(1);
+  }
+});
+
 const express = require("express")
 const cors = require("cors")
 const helmet = require("helmet")

@@ -59,7 +59,10 @@ class EventController {
 
   async getEvents(req, res) {
     try {
-      const { page = 1, limit = 10, tags, location, startDate, endDate, status = "upcoming" } = req.query
+      // Validate and sanitize query parameters
+      const page = Math.max(1, parseInt(req.query.page) || 1)
+      const limit = Math.min(50, Math.max(1, parseInt(req.query.limit) || 10))
+      const { tags, location, startDate, endDate, status = "upcoming" } = req.query
 
       const eventRepository = AppDataSource.getRepository("Event")
 
@@ -203,11 +206,13 @@ class EventController {
 
       await attendeeRepository.save(newAttendee)
 
-      // Update event attendee count if approved
+      // Update event attendee count if approved using atomic increment
       if (!event.requiresApproval) {
-        await eventRepository.update(Number.parseInt(id), {
-          currentAttendees: event.currentAttendees + 1,
-        })
+        await eventRepository.increment(
+          { id: Number.parseInt(id) }, 
+          "currentAttendees", 
+          1
+        )
 
         // Send notification to event creator
         if (event.creator.fcmToken) {
@@ -255,17 +260,13 @@ class EventController {
       // Remove attendee record
       await attendeeRepository.remove(attendee)
 
-      // Update event attendee count if was approved
+      // Update event attendee count if was approved using atomic decrement
       if (attendee.status === "joined") {
-        const event = await eventRepository.findOne({
-          where: { id: Number.parseInt(id) },
-        })
-
-        if (event) {
-          await eventRepository.update(Number.parseInt(id), {
-            currentAttendees: Math.max(0, event.currentAttendees - 1),
-          })
-        }
+        await eventRepository.decrement(
+          { id: Number.parseInt(id) }, 
+          "currentAttendees", 
+          1
+        )
       }
 
       res.json({

@@ -2,6 +2,22 @@ const admin = require("firebase-admin")
 
 class NotificationService {
   constructor() {
+    // Validate required Firebase environment variables
+    const requiredFirebaseVars = [
+      'FIREBASE_PROJECT_ID',
+      'FIREBASE_PRIVATE_KEY_ID', 
+      'FIREBASE_PRIVATE_KEY',
+      'FIREBASE_CLIENT_EMAIL',
+      'FIREBASE_CLIENT_ID',
+      'FIREBASE_CLIENT_CERT_URL'
+    ];
+
+    const missingVars = requiredFirebaseVars.filter(varName => !process.env[varName]);
+    if (missingVars.length > 0) {
+      console.warn(`Firebase environment variables missing: ${missingVars.join(', ')}. Push notifications will be disabled.`);
+      return;
+    }
+
     if (!admin.apps.length) {
       admin.initializeApp({
         credential: admin.credential.cert({
