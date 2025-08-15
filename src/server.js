@@ -21,9 +21,10 @@ const app = express()
 const server = createServer(app)
 
 // Socket.IO setup
+const allowedOrigins = process.env.FRONTEND_URL.split(',').map(url => url.trim())
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND_URL,
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
   },
 })
@@ -36,8 +37,10 @@ app.use(morgan("combined"))
 // CORS configuration
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: allowedOrigins,
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   }),
 )
 
@@ -147,10 +150,11 @@ AppDataSource.initialize()
   .then(() => {
     console.log("Database connected successfully")
 
-    server.listen(PORT, () => {
+    server.listen(PORT, '0.0.0.0', () => {
       console.log(`Server is running on port ${PORT}`)
       console.log(`Environment: ${process.env.NODE_ENV}`)
       console.log(`Health check: http://localhost:${PORT}/health`)
+      console.log(`External access: http://0.0.0.0:${PORT}/health`)
     })
   })
   .catch((error) => {

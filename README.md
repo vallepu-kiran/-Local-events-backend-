@@ -61,41 +61,41 @@ A comprehensive Express.js backend API for a local events mobile application bui
 
 ## API Endpoints
 
-### Authentication
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `POST /api/auth/google` - Google OAuth authentication
-- `GET /api/auth/profile` - Get user profile
-- `PUT /api/auth/profile` - Update user profile
-- `PUT /api/auth/fcm-token` - Update FCM token
+   ### Authentication
+   - `POST /api/auth/register` - User registration
+   - `POST /api/auth/login` - User login
+   - `POST /api/auth/google` - Google OAuth authentication
+   - `GET /api/auth/profile` - Get user profile
+   - `PUT /api/auth/profile` - Update user profile
+   - `PUT /api/auth/fcm-token` - Update FCM token
 
-### Events
-- `GET /api/events` - Get events with filtering
-- `GET /api/events/:id` - Get event by ID
-- `POST /api/events` - Create new event
-- `PUT /api/events/:id` - Update event
-- `DELETE /api/events/:id` - Delete event
-- `POST /api/events/:id/join` - Join event
-- `DELETE /api/events/:id/leave` - Leave event
-- `POST /api/events/:id/like` - Like event
+   ### Events
+   - `GET /api/events` - Get events with filtering
+   - `GET /api/events/:id` - Get event by ID
+   - `POST /api/events` - Create new event
+   - `PUT /api/events/:id` - Update event
+   - `DELETE /api/events/:id` - Delete event
+   - `POST /api/events/:id/join` - Join event
+   - `DELETE /api/events/:id/leave` - Leave event
+   - `POST /api/events/:id/like` - Like event
 
-### Messages
-- `POST /api/messages/events/:eventId` - Send message
-- `GET /api/messages/events/:eventId` - Get event messages
-- `PUT /api/messages/:messageId` - Edit message
-- `DELETE /api/messages/:messageId` - Delete message
+   ### Messages
+   - `POST /api/messages/events/:eventId` - Send message
+   - `GET /api/messages/events/:eventId` - Get event messages
+   - `PUT /api/messages/:messageId` - Edit message
+   - `DELETE /api/messages/:messageId` - Delete message
 
-### Reviews
-- `POST /api/reviews/events/:eventId` - Create review
-- `GET /api/reviews/events/:eventId` - Get event reviews
-- `GET /api/reviews/users/:userId` - Get user reviews
+   ### Reviews
+   - `POST /api/reviews/events/:eventId` - Create review
+   - `GET /api/reviews/events/:eventId` - Get event reviews
+   - `GET /api/reviews/users/:userId` - Get user reviews
 
-### Admin
-- `GET /api/admin/dashboard/stats` - Dashboard statistics
-- `GET /api/admin/users` - Get users with filtering
-- `GET /api/admin/events` - Get events with filtering
-- `PUT /api/admin/users/:userId/status` - Update user status
-- `DELETE /api/admin/events/:eventId` - Delete event
+   ### Admin
+   - `GET /api/admin/dashboard/stats` - Dashboard statistics
+   - `GET /api/admin/users` - Get users with filtering
+   - `GET /api/admin/events` - Get events with filtering
+   - `PUT /api/admin/users/:userId/status` - Update user status
+   - `DELETE /api/admin/events/:eventId` - Delete event
 
 ## Database Schema
 

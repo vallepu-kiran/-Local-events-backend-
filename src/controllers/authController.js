@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const AppDataSource = require("../config/database")
-const { sendEmail } = require("../services/emailService")
+const emailService = require("../services/emailService")
 
 class AuthController {
   async register(req, res) {
@@ -43,15 +43,7 @@ class AuthController {
 
       // Send welcome email
       try {
-        await sendEmail({
-          to: email,
-          subject: "Welcome to Local Events App!",
-          html: `
-            <h1>Welcome ${firstName}!</h1>
-            <p>Thank you for joining our local events community.</p>
-            <p>Start discovering amazing events in your area!</p>
-          `,
-        })
+        await emailService.sendWelcomeEmail(savedUser)
       } catch (emailError) {
         console.error("Failed to send welcome email:", emailError)
       }
