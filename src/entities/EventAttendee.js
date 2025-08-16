@@ -9,6 +9,12 @@ module.exports = new EntitySchema({
       primary: true,
       generated: true,
     },
+    userId: {
+      type: "int",
+    },
+    eventId: {
+      type: "int",
+    },
     status: {
       type: "enum",
       enum: ["pending", "approved", "rejected", "joined"],
